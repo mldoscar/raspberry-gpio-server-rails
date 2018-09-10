@@ -1,0 +1,20 @@
+%h1.center GPIO
+
+.row
+  .col.s12
+    %h2= 'GPIO Output Pins'
+  = form_tag gpio_set_input_pin_path, method: :post do
+    .col.s6.m4
+      = label_tag :pin, 'PIN'
+      = number_field_tag :pin, @pin
+    .col.s6.m4
+      = label_tag :state, 'STATE'
+      = select_tag :state, options_for_select(%w(high low clean_up), @state), class: 'browser-default'
+    .col.s12.m4{style: 'margin-top: 24px;'}
+      = button_tag class: 'btn blue', type: :submit do
+        = 'Send'
+.row
+  .col.s12
+    %h2= 'Hard Reset'
+  .col.s12
+    = link_to 'Reset now!', gpio_hard_reset_path, class: 'btn red', method: :post, data: { confirm: 'Reset?' }
